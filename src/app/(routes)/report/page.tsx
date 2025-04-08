@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 export default function Repost({}: Props) {
-  return (
-    <div>Repost</div>
-  )
+  return <div>Repost</div>;
 }
