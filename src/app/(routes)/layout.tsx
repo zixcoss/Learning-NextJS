@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import Box from "@mui/material/Box";
 import Header from "../_components/layout/Header";
@@ -9,17 +9,17 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function Defaultlayout({ children }: Props) {
-   const [open ,setOpen] = React.useState(false);
+export default function DefaultLayout({ children }: Props) {
+  const [open, setOpen] = React.useState(false);
 
-   const handleDrawerOpen = () => setOpen(true);
-   const handleDrawerClose = () => setOpen(false);
-  
-    return (
+  const handleDrawerOpen = () => setOpen(true);
+  const handleDrawerClose = () => setOpen(false);
+
+  return (
     <section>
-      <Box sx={{ dispaly: "flex" }}>
-        <Header open={open} handleDrawerOpen={handleDrawerOpen}/>
-        <Sidebar open={open} handleDrawerClose={handleDrawerClose}/>
+      <Box sx={{ display: "flex" }}>
+        <Header open={open} handleDrawerOpen={handleDrawerOpen} />
+        <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
           {children}
