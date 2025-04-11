@@ -13,6 +13,7 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/navigation";
 interface User {
   username: string;
   password: string;
@@ -21,6 +22,7 @@ interface User {
 type Props = {};
 
 export default function Register({}: Props) {
+  const router = useRouter();
   const initialValue: User = { username: "", password: "" };
   const formValidateSchema = Yup.object().shape({
     username: Yup.string().required("Username is required").trim(),
@@ -94,8 +96,8 @@ export default function Register({}: Props) {
         />
 
         <Button
-          // sx={{ marginTop: 4 }}
-          className="mt-8"
+          sx={{ marginTop: 4 }}
+          // className="mt-8"
           type="submit"
           fullWidth
           variant="contained"
@@ -105,12 +107,14 @@ export default function Register({}: Props) {
         </Button>
 
         <Button
-          // sx={{ marginTop: 2 }}
-          className="mt-4"
+          sx={{ marginTop: 2 }}
+          // className="mt-4"
           type="button"
           fullWidth
           variant="outlined"
-          onClick={() => {}}
+          onClick={() => {
+            router.push("/login");
+          }}
         >
           Cancel
         </Button>
@@ -120,15 +124,25 @@ export default function Register({}: Props) {
 
   return (
     <Box className="flex justify-center items-center">
-      
       <Card className="max-w-[345px] mt-[100px]">
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h2" className="flex justify-center">
             Register
           </Typography>
           {showForm()}
         </CardContent>
       </Card>
+      <style jsx global>
+        {`
+          body {
+            min-height: 100vh;
+            position: relative;
+            margin: 0;
+            background-size: cover;
+            background-image: url("/static/image/bg.jpg");
+          }
+        `}
+      </style>
     </Box>
   );
 }

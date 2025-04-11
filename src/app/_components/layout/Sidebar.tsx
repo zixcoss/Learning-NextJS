@@ -70,12 +70,14 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
+
 const routesList = [
   { pathname: "/stock", text: "Stock", icon: <Layers /> },
   { pathname: "/report", text: "Report", icon: <BarChart /> },
   // { pathname: "/shop", text: "Shop", icon: <Shop /> },
   { pathname: "/aboutus", text: "About us", icon: <Person /> },
 ];
+
 const CustomLink = styled(
   Link,
   {}
