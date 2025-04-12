@@ -14,6 +14,10 @@ import { Controller, useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/src/store/store";
+import { signUp, userSelector } from "@/src/store/slices/userSlice";
+import { useSelector } from "react-redux";
+
 interface User {
   username: string;
   password: string;
@@ -34,10 +38,18 @@ export default function Register({}: Props) {
     resolver: yupResolver(formValidateSchema),
   });
 
+  const reducer = useSelector(userSelector);
+  const dispatch = useAppDispatch();
+
   const showForm = () => {
     return (
-      <form onSubmit={handleSubmit((value:User)=> {
-        alert(JSON.stringify(value))
+      <form onSubmit={handleSubmit(async (value:User)=> {
+        const result = await dispatch(signUp(value));
+        if(signUp.fulfilled.match(result)){
+          alert("Register successfully");
+        }else if(signUp.rejected.match(result)){
+          alert("Register failed");
+        }
       })}>
         {/* Username */}
         <Controller
@@ -79,6 +91,7 @@ export default function Register({}: Props) {
               variant="outlined"
               margin="normal"
               fullWidth
+              type="password"
               slotProps={{
                 input: {
                   startAdornment: (
