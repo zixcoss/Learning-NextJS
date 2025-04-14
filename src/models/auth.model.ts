@@ -1,3 +1,4 @@
+import { UserData } from "./user.model";
 
 
 export interface SignIn{
@@ -15,5 +16,5 @@ export interface SignUp{
 export interface GetSession{
     result: string;
     error?: string;
-    // user?: UserData;
+    user?: UserData;
 };

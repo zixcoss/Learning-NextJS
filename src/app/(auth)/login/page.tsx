@@ -1,5 +1,6 @@
 "use client";
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -15,7 +16,8 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/src/store/store";
-import { signIn } from "@/src/store/slices/userSlice";
+import { signIn, userSelector } from "@/src/store/slices/userSlice";
+import { useSelector } from "react-redux";
 interface User {
   username: string;
   password: string;
@@ -24,8 +26,11 @@ interface User {
 type Props = {};
 
 export default function Login({}: Props) {
+
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const reducer = useSelector(userSelector);
+
   const initialValue: User = { username: "", password: "" };
   const formValidateSchema = Yup.object().shape({
     username: Yup.string().required("Username is required").trim(),
@@ -47,9 +52,7 @@ export default function Login({}: Props) {
         onSubmit={handleSubmit(async (value: User) => {
           const result = await dispatch(signIn(value));
           if (signIn.fulfilled.match(result)) {
-            alert("Login successfully");
-          } else if (signIn.rejected.match(result)) {
-            alert("Login failed");
+            router.push("/stock");
           }
         })}
       >
@@ -110,6 +113,8 @@ export default function Login({}: Props) {
           )}
         />
 
+        {reducer.status == "failed" && (<Alert severity="error" >Login failed</Alert>)}
+
         <Button
           sx={{ marginTop: 4 }}
           // className="mt-8"
@@ -117,6 +122,7 @@ export default function Login({}: Props) {
           fullWidth
           variant="contained"
           color="primary"
+          disabled = {reducer.status == "fetching"}
         >
           Login
         </Button>
