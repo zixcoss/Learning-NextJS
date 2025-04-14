@@ -14,6 +14,8 @@ import { Controller, useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/src/store/store";
+import { signIn } from "@/src/store/slices/userSlice";
 interface User {
   username: string;
   password: string;
@@ -23,22 +25,34 @@ type Props = {};
 
 export default function Login({}: Props) {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const initialValue: User = { username: "", password: "" };
   const formValidateSchema = Yup.object().shape({
     username: Yup.string().required("Username is required").trim(),
-    password: Yup.string().required("Password is required").trim()
+    password: Yup.string().required("Password is required").trim(),
   });
 
-  const { control, handleSubmit ,formState: {errors}} = useForm<User>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<User>({
     defaultValues: initialValue,
     resolver: yupResolver(formValidateSchema),
   });
 
   const showForm = () => {
     return (
-      <form onSubmit={handleSubmit((value:User)=> {
-        alert(JSON.stringify(value))
-      })}>
+      <form
+        onSubmit={handleSubmit(async (value: User) => {
+          const result = await dispatch(signIn(value));
+          if (signIn.fulfilled.match(result)) {
+            alert("Login successfully");
+          } else if (signIn.rejected.match(result)) {
+            alert("Login failed");
+          }
+        })}
+      >
         {/* Username */}
         <Controller
           name="username"
@@ -78,6 +92,7 @@ export default function Login({}: Props) {
               helperText={errors.password?.message?.toString()}
               variant="outlined"
               margin="normal"
+              type="password"
               fullWidth
               slotProps={{
                 input: {
@@ -126,7 +141,12 @@ export default function Login({}: Props) {
     <Box className="flex justify-center items-center">
       <Card className="max-w-[345px] mt-[100px]">
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2" className="flex justify-center">
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+            className="flex justify-center"
+          >
             Login
           </Typography>
           {showForm()}
@@ -141,8 +161,7 @@ export default function Login({}: Props) {
             background-size: cover;
             background-image: url("/static/image/bg.jpg");
           }
-        `
-        }
+        `}
       </style>
     </Box>
   );

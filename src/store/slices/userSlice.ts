@@ -32,11 +32,20 @@ export const signUp = createAsyncThunk(
     }
 );
 
+export const signIn = createAsyncThunk(
+    "user/signin",
+    async (credential:SignAction) => {
+        const response = await serverService.signIn(credential);
+        return response;
+    }
+);
+
 const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {},
     extraReducers: builder => {
+        //Register case
         builder.addCase(signUp.pending, (state) => {
             state.status = "fetching";
         });
@@ -46,6 +55,19 @@ const userSlice = createSlice({
         });
 
         builder.addCase(signUp.rejected, (state) => {
+            state.status = "failed";
+        });
+
+        //Login case
+        builder.addCase(signIn.pending, (state) => {
+            state.status = "fetching";
+        });
+
+        builder.addCase(signIn.fulfilled, (state, action)=>{
+            state.status = "success";
+        });
+
+        builder.addCase(signIn.rejected, (state) => {
             state.status = "failed";
         });
     }
