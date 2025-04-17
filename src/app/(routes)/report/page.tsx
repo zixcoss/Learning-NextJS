@@ -1,7 +1,8 @@
+"use client"
 import React from "react";
 
 type Props = {};
 
-export default function Repost({}: Props) {
-  return <div>Repost</div>;
+export default function Report({}: Props) {
+  return <div>Report</div>;
 }

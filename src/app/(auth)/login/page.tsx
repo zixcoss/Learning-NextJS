@@ -166,8 +166,8 @@ export default function Login({}: Props) {
             margin: 0;
             background-size: cover;
             background-image: url("/static/image/bg.jpg");
-          }
-        `}
+          }`
+        }
       </style>
     </Box>
   );

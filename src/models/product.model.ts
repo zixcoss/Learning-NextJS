@@ -1,7 +1,7 @@
 export interface ProductData{
     id?:number;
     name: string;
-    image: string;
+    image?: string;
     price: number;
     stock: number;
     file?: any;
