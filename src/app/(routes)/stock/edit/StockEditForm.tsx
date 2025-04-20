@@ -170,7 +170,7 @@ export default function StockEditForm({ product }: Props) {
             type="submit"
             className="mr-2"
           >
-            Create
+            Edit
           </Button>
           <Button
             fullWidth

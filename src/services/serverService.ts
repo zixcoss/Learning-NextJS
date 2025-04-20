@@ -53,3 +53,7 @@ export const doGetStockById = async (id: string) => {
 export const editProduct = async (data: FormData): Promise<void> => {
   await httpClient.put(`/stock/product`, data);
 };
+
+export const deleteProduct = async (id: string): Promise<void> => {
+  await httpClient.delete(`/stock/product/${id}`);
+};

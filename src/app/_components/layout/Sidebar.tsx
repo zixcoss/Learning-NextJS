@@ -74,7 +74,7 @@ const Drawer = styled(MuiDrawer, {
 const routesList = [
   { pathname: "/stock", text: "Stock", icon: <Layers /> },
   { pathname: "/report", text: "Report", icon: <BarChart /> },
-  // { pathname: "/shop", text: "Shop", icon: <Shop /> },
+  { pathname: "/shop", text: "Shop", icon: <Shop /> },
   { pathname: "/aboutus", text: "About us", icon: <Person /> },
 ];
 
