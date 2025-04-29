@@ -9,18 +9,22 @@ const config: Config = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        fluid: "repeat(auto-fit, minmax(16rem, 20fr))",
+        fluid: "repeat(auto-fit, minmax(5rem, 20fr))",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
-        "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        mycolor: '#123456',
+      }
     },
   },
-  plugins: [],
-//   corePlugins: {
-//     preflight: false,
-//   },
+  plugins: [
+    // corePlugins: {
+    //   preflight: false,
+    // },
+  ],
 };
 export default config;

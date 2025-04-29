@@ -1,15 +1,27 @@
 @import "tailwindcss";
+/* @import "tailwindcss/preflight"; */
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@layer utilities{
+  .grid-cols-fluid {
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 20fr));
+  }
+
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+
+  .bg-gradient-conic {
+    background-image: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+  }
+
+  .bg-mycolor {
+    background-color: #123456;
+  }
 }
 
 /* @media (prefers-color-scheme: dark) {

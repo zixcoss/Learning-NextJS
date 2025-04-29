@@ -82,7 +82,7 @@ export default function StockEditForm({ product }: Props) {
   };
 
   return (
-    //@ts-ignore
+    // @ts-ignore
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <Card>
         <CardContent className="p-8">
